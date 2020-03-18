@@ -8,10 +8,4 @@ RSpec.describe "shelter index page", type: :feature do
 
     expect(page).to have_content(shelter_1.name)
   end
-
-  it "can link to new shelter form" do
-    click_on 'New Shelter'
-
-    expect(page).to have_current_path "/new"
-  end
 end

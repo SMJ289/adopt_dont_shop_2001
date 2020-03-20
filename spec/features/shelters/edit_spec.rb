@@ -4,7 +4,7 @@ RSpec.describe "New Shelter" do
   describe 'As a visitor' do
     describe 'When I visit the shelter show page' do
       describe 'I can click Update Shelter' do
-        it "I can update a shelter" do
+        it "to update a shelter" do
           shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
 
           visit "/shelters/#{shelter_1.id}"
@@ -21,7 +21,7 @@ RSpec.describe "New Shelter" do
 
           click_on 'Submit Changes'
 
-          expect(page).to have_current_path "/shelters/#{shelter.id}"
+          expect(page).to have_current_path "/shelters/#{shelter_1.id}"
           expect(page).to have_content ('New Denver Animal Shelter')
         end
       end

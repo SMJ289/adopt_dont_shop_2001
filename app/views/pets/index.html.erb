@@ -3,6 +3,7 @@
 <% @pets.each do |pet| %>
   <img><%= image_tag(pet.image) %></img>
   <h2>Name:<%= pet.name %></h2>
-  <p>Approximate Age:<%= pet.approximate_age %>
-  <p>Sex:<%= pet.sex %>
+  <p>Approximate Age:<%= pet.approximate_age %></p>
+  <p>Sex:<%= pet.sex %></p>
+  <p>Shelter:<%= pet.shelter.name %></p>
 <% end %>

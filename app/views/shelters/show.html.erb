@@ -3,6 +3,6 @@
 <p>City: <%= @shelter.city %></p>
 <p>State: <%= @shelter.state %></p>
 <p>Zip: <%= @shelter.zip %></p>
-
+<%= link_to "Available Pets", "/shelters/#{@shelter.id}/pets"%>
 <%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %>
 <%= link_to 'Delete', "/shelters/#{@shelter.id}", method: :delete %>

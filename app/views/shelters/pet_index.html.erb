@@ -1,10 +1,10 @@
 <h1>Available Pets</h1>
 
 <% @shelter.pets.each do |pet| %>
-  <h2><%= pet.name %></h2>
-  <img><%= image_tag(pet.image) %></img>
-  <p><%= pet.approximate_age %></p>
-  <p><%= pet.sex %></p>
+  <img><%= image_tag(pet.image, width:"200") %></img>
+  <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}"%></h2>
+  <p>Age: <%= pet.approximate_age %></p>
+  <p>Sex: <%= pet.sex %></p>
 <% end %>
 
 <%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new" %>

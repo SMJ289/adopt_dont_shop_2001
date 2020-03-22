@@ -23,6 +23,5 @@ RSpec.describe 'As a Visitor' do
     expect(current_path).to eq('/pets')
     expect(page).to_not have_content(pet_1.name)
     expect(page).to have_content(pet_2.name)
-    expect(page).to_not have_link('Delete')
   end
 end

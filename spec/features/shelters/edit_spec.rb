@@ -24,6 +24,18 @@ RSpec.describe "New Shelter" do
           expect(page).to have_current_path "/shelters/#{shelter_1.id}"
           expect(page).to have_content ('New Denver Animal Shelter')
         end
+
+        it "there is a navigation link to shelter index and pet index" do
+          shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
+          
+          visit "/shelters/#{shelter_1.id}/edit"
+          click_on "All Shelters"
+          expect(page).to have_current_path "/shelters"
+
+          visit "/shelters/#{shelter_1.id}/edit"
+          click_on "All Pets"
+          expect(page).to have_current_path "/pets"
+        end
       end
     end
   end

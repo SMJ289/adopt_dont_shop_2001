@@ -35,6 +35,24 @@ RSpec.describe "New Shelter" do
           expect(page).to_not have_content ('5')
           expect(page).to_not have_content ('energy!')
         end
+
+        it "there is a navigation link to shelter index and pet index" do
+          shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
+          pet_1 = shelter_1.pets.create(
+            image: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Jack_Russell_Terrier_1.jpg",
+            name: "Spot",
+            description: "Jack Russell Terrier with tons of energy!",
+            approximate_age: "5",
+            sex: "male")
+
+          visit "/pets/#{pet_1.id}/edit"
+          click_on "All Shelters"
+          expect(page).to have_current_path "/shelters"
+
+          visit "/pets/#{pet_1.id}/edit"
+          click_on "All Pets"
+          expect(page).to have_current_path "/pets"
+        end
       end
     end
   end

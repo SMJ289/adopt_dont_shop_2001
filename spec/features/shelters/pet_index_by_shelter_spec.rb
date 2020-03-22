@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "pet index page", type: :feature do
-  it "can show all pets with their image, name, age, sex, and shelter" do
+  it "can show all pets with their image, name, age, and sex" do
     shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
     shelter_2 = Shelter.create(name: "Aurora Animal Shelter", address: "15750 E 32nd Ave", city: "Aurora", state: "CO", zip: "80011")
     pet_1 = shelter_1.pets.create(
@@ -36,5 +36,37 @@ RSpec.describe "pet index page", type: :feature do
 
     expect(page).to_not have_css("img[src*= '#{pet_3.image}']")
     expect(page).to_not have_content(pet_3.name)
+  end
+
+  it "the pet name is a link to their show page" do
+    shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
+
+    pet_1 = shelter_1.pets.create(
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Jack_Russell_Terrier_1.jpg",
+      name: "Spot",
+      approximate_age: "5",
+      sex: "male")
+
+    visit "/pets"
+
+    click_on "#{pet_1.name}"
+
+    expect(page).to have_current_path "/pets/#{pet_1.id}"
+
+    expect(page).to have_css("img[src*= '#{pet_1.image}']")
+    expect(page).to have_content(pet_1.name)
+    expect(page).to have_content(pet_1.approximate_age)
+    expect(page).to have_content(pet_1.sex)
+  end
+
+  it "there is a navigation link to shelter index and pet index" do
+    shelter_1 = Shelter.create(name: "Denver Animal Shelter", address: "1241 W Bayaud Ave", city: "Denver", state: "CO", zip: "80223")
+    visit "/shelters/#{shelter_1.id}/pets"
+    click_on "All Shelters"
+    expect(page).to have_current_path "/shelters"
+
+    visit "/shelters/#{shelter_1.id}/pets"
+    click_on "All Pets"
+    expect(page).to have_current_path "/pets"
   end
 end

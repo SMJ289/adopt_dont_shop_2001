@@ -37,7 +37,7 @@ class PetsController < ApplicationController
       approximate_age: pet_params[:approximate_age],
       sex: pet_params[:sex],
       })
-    pet.save
+      
     redirect_to "/pets/#{pet.id}"
   end
 

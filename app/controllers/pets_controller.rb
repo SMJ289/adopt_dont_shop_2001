@@ -12,7 +12,7 @@ class PetsController < ApplicationController
   end
 
   def create
-    Pet.create!({
+    Pet.create({
       name: pet_params[:name],
       image: pet_params[:image],
       description: pet_params[:description],
